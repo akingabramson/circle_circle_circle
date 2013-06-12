@@ -1,0 +1,10 @@
+<h2> You are <%=@user.name%>! </h2>
+
+Your circles are:<br>
+
+<ul>
+<% @user.circle_circles.each do |circle|%>
+	<li><%= link_to circle.name, circle_circle_url(circle) %></li>
+
+<% end %>
+</ul>

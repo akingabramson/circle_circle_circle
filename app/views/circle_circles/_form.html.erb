@@ -1,0 +1,28 @@
+<% action_url = (method == :post) ? user_circle_circles_url(current_user) : circle_circle_url(@circle.id) %>
+
+<form action="<%= action_url %>" method="post">
+	<% if method == :put %>
+	<input type="hidden" name="_method"
+				 value="put">
+  <% end %>
+	<input type="hidden" name="authenticity_token"
+				 value=<%= form_authenticity_token %> >
+
+	<label for="circle_name">Circle Name</label>
+	<input type="text" name="circle[name]" id="circle_name" value="<%=@circle.name%>">
+	<br>
+
+	<input type="hidden" name="circle[friend_ids][]" value="">
+
+	<label for="circle_friend_ids">Friends in your circle!</label>
+		<% @users.each do |u| %>
+		<%next if current_user.id == u.id %>
+		<label for="circle_friend_ids_<%=u.id%>"><%=u.name%></label>
+		<input type="checkbox" name="circle[friend_ids][]" value="<%= u.id %>" id="circle_friend_ids_<%= u.id %>" <%="checked" if @circle.friends.include?(u)%>>
+
+	<% end %>
+	<br>
+
+		<input type="submit" value="Create CircleCircleCircle...Circle">
+
+</form>

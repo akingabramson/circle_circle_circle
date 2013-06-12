@@ -1,0 +1,16 @@
+<h1>Feed Me</h1>
+<h3>om nom nom</h3>
+
+<% @feed.each do |food|%>
+	<% food.each do |carb| %>
+		<p>
+			Author: <%= carb.user.name%><br>
+			Title: <%= carb.name%>:<br>
+			<%=carb.body%><br>
+			<%carb.links.each do |link| %>
+				<%= link_to link.address %><br>
+			<% end %>
+		</p>
+	<% end %>
+
+<% end %>

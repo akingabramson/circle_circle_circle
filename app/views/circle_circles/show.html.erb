@@ -1,0 +1,7 @@
+<h2> <%=@circle.name%> </h2>
+
+<ul>
+<% @circle.friends.each do |friend|%>
+	<li><%= link_to friend.name, user_url(friend) %></li>
+<% end %>
+</ul>

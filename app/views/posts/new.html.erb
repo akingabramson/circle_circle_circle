@@ -1,0 +1,30 @@
+<h1>New Post</h1>
+
+<form action="<%= user_posts_url %>" method="post">
+	<input type="hidden" name="authenticity_token"
+				 value=<%= form_authenticity_token %> >
+	<label for="post_name">Name</label>
+		<input type="text" value="<%= @post.name %>" id="post.name" name="post[name]">
+		<br>
+
+	<label for="post_body">Body</label>
+	<textarea id ="post_body" name="post[body]"><%=@post.body%></textarea>
+		<br>
+
+	<% 3.times do |i|%>
+		<label id="link_<%=i%>">Link <%=i%>:</label>
+		<input value="<%=@post.links[i].address if @post.links[i]%>" id="link_<%=i%>" 	name="post[links_attributes][<%= i %>][address]" type="text">
+		<br>
+	<% end %>
+	<br>
+
+	<label for="circle_ids">Circles!</label>
+
+	<% @circles.each do |c| %>
+		<label for="circle_ids_<%=c.id%>"><%=c.name%></label>
+		<input type="checkbox" name="post[circle_circle_ids][]" value="<%= c.id %>" id="circle_ids_<%= c.id %>">
+
+	<% end %>
+
+		<input type="submit" value="Create post">
+</form>

@@ -1,0 +1,39 @@
+<h2>New user</h2>
+
+<form action="<%= users_url %>" method="post">
+	<!-- user signup -->
+	<input type="hidden" name="authenticity_token"
+				 value=<%= form_authenticity_token %> >
+	<label for="user_username">Username</label>
+		<input type="text" value="<%= @user.username %>" id="user_username" name="user[username]">
+		<br>
+
+	<label for="user_password">Password</label>
+		<input type="password" id="user_password" name="user[password]">
+		<br>
+
+	<label for="user_name">Name</label>
+		<input type="text" value="<%= @user.name %>" id="user_name" name="user[name]">
+		<br>
+
+		<!-- add posts -->
+
+
+		<label for="user_post_name">Post name</label>
+			<input type="text" value="<%= @post.name %>" id="user_post_name" name="user[posts_attributes][0][name]">
+			<br>
+
+		<label for="post_body">Post body</label>
+		<textarea id ="post_body" name="user[posts_attributes][1][body]"><%=@post.body%></textarea>
+			<br>
+
+		<% 3.times do |i|%>
+			<label id="link_<%=i%>">Link <%=i%>:</label>
+			<input value="<%=@post.links[i].address if @post.links[i]%>" id="link_<%=i%>" 	name="user[posts_attributes][2][links_attributes][<%= i %>][address]" type="text">
+			<br>
+		<% end %>
+
+
+
+		<input type="submit" value="Create user">
+</form>
